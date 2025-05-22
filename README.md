@@ -78,33 +78,45 @@ PyPDF2
 pillow
 
 # Data Processing
-pandas>=2.0.0
-numpy>=1.24.0
+pandas
+numpy
 
 # API & Networking
-requests>=2.31.0
-aiohttp>=3.9.0
+requests
+aiohttp
 
 # Validation & Type Checking
-pydantic>=2.0.0
+pydantic
 
 ```
 
 ## Usage
 
-Run the latest UI version:
+### 1. Start the ADK API Server
 ```bash
-Make sure you're in the agents folder
+# Navigate to Agents folder
+cd Agents
+
+# Start the API server
 adk api_server
-
-Create a new terminal
-
-Make sure you're in the ui folder
-streamlit run Ui.py
-
-
 ```
 
+### 2. Launch the UI
+```bash
+# Open a new terminal
+# Navigate to Latest folder
+cd Latest
+
+# Start the Streamlit app
+streamlit run Ui.py
+```
+
+> **Important**: Both servers (ADK API Server and Streamlit) must be running simultaneously for the application to work properly.
+
+### Troubleshooting
+- Make sure your `.env` file in the Agents/invoices folder contains valid API keys
+- Verify both terminals show successful startup messages
+- Check ports 8000 (ADK) and 8501 (Streamlit) are available
 
 ### Testing
 Use the sample invoices in `/Sample invoices/` for testing the extraction and validation features.
