@@ -1,102 +1,82 @@
-# 📄 Sistema de Processamento e Validação de Faturas
+# 📄 Invoice Processing and Validation System
 
-Este projeto apresenta um sistema automatizado para extração, edição e validação de dados de faturas em formato PDF, utilizando inteligência artificial (LLMs) para a extração e Pydantic para validação robusta dos campos. A interface de usuário é desenvolvida com Streamlit, proporcionando uma experiência interativa para revisão e correção dos dados.
+This project presents an automated system for extracting, editing, and validating data from PDF invoices. It leverages Artificial Intelligence (LLMs) for data extraction and Pydantic for robust field validation. The user interface is developed with Streamlit, providing an interactive experience for reviewing and correcting the extracted data.
 
-## ✨ Funcionalidades Principais
+## ✨ Key Features
 
-* **Extração de Dados com LLM:** Utiliza um modelo de linguagem grande (LLM) (presumivelmente `gemini-1.5-flash` via `google-adk`) para extrair informações chave de documentos PDF de faturas (tipo de documento, ID, data, valores financeiros, dados do fornecedor e cliente).
-* **Interface Interativa (Streamlit):** Uma aplicação web amigável permite o upload de PDFs, visualização dos dados extraídos e edição manual.
-* **Validação de Dados Robustas:** Implementa validações rigorosas (com base em `invoice_validator.py` e Pydantic) para garantir a integridade e o formato correto dos dados extraídos (datas, moedas, NIFs, valores financeiros, etc.).
-* **Feedback Visual Claro:** Fornece indicadores visuais (verde, amarelo, vermelho) para o status de validação de cada campo, com mensagens detalhadas sobre os erros ou avisos.
-* **Resumo de Validação:** Apresenta um painel de resumo com o status geral da validação da fatura.
-* **Configuração Dinâmica do Formulário:** Permite selecionar quais campos devem ser exibidos e editados na interface, através de presets ou seleção personalizada.
-* **Exportação de Dados:** Possibilita exportar os dados da fatura (editados e validados) para o formato JSON.
+* **LLM-powered Data Extraction:** Utilizes a Large Language Model (LLM) (presumably `gemini-1.5-flash` via `google-adk`) to extract key information from PDF invoice documents (document type, ID, date, financial values, vendor, and customer details).
+* **Interactive Interface (Streamlit):** A user-friendly web application allows for PDF uploads, visualization of extracted data, and manual editing.
+* **Robust Data Validation:** Implements strict validations (based on `invoice_validator.py` and Pydantic) to ensure the integrity and correct format of extracted data (dates, currencies, tax IDs, financial values, etc.).
+* **Clear Visual Feedback:** Provides visual indicators (green, yellow, red) for the validation status of each field, along with detailed messages about errors or warnings.
+* **Validation Summary:** Presents a summary panel with the overall validation status of the invoice.
+* **Dynamic Form Configuration:** Allows selecting which fields should be displayed and editable in the interface, via presets or custom selection.
+* **Data Export:** Enables exporting the (edited and validated) invoice data to JSON format.
 
-## 🚀 Como Executar o Projeto
+## 🚀 How to Run the Project
 
-### Pré-requisitos
+### Prerequisites
 
 * Python 3.8+
-* `pip` (gerenciador de pacotes Python)
-* **Servidor LLM:** Este projeto interage com um servidor de LLM para a extração de dados. O `agent.py` demonstra a configuração de um `Agent` do Google ADK. Para a execução da UI, um endpoint acessível (e.g., `http://localhost:8000/run`) que processa PDFs e retorna os dados de fatura é necessário.
+* `pip` (Python package manager)
+* **LLM Server:** This project interacts with an LLM server for data extraction. `agent.py` demonstrates the configuration of a Google ADK `Agent`. For the UI to function, an accessible endpoint (e.g., `http://localhost:8000/run`) that processes PDFs and returns invoice data is required.
 
-### Configuração e Instalação
+### Setup and Installation
 
-1.  **Clone o Repositório:**
+1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/SEU_USUARIO/invoice-processor-project.git](https://github.com/SEU_USUARIO/invoice-processor-project.git)
+    git clone [https://github.com/YOUR_USERNAME/invoice-processor-project.git](https://github.com/YOUR_USERNAME/invoice-processor-project.git)
     cd invoice-processor-project
     ```
-    *(Substitua `SEU_USUARIO` pelo seu nome de usuário do GitHub)*
+    *(Replace `YOUR_USERNAME` with your GitHub username)*
 
-2.  **Crie um Ambiente Virtual (Altamente Recomendado):**
+2.  **Create a Virtual Environment (Highly Recommended):**
     ```bash
     python -m venv venv
-    # No Windows
+    # On Windows
     venv\Scripts\activate
-    # No macOS/Linux
+    # On macOS/Linux
     source venv/bin/activate
     ```
 
-3.  **Instale as Dependências:**
+3.  **Install Dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Configuração de Variáveis de Ambiente (Opcional, mas Recomendado):**
-    Se seu agente ou API exigir chaves, crie um arquivo `.env` na raiz do projeto:
+4.  **Environment Variables Configuration (Optional, but Recommended):**
+    If your agent or API requires keys, create a `.env` file at the root of the project:
     ```
-    GOOGLE_API_KEY="SUA_CHAVE_API"
-     # Outras variáveis, se necessário
+    GOOGLE_API_KEY="YOUR_API_KEY_HERE"
+    # Other variables, if necessary
     ```
-    Lembre-se de que o arquivo `.env` está configurado para ser ignorado pelo Git (`.gitignore`).
+    Remember that the `.env` file is configured to be ignored by Git (`.gitignore`).
 
-### Executando a Aplicação
+### Running the Application
 
-1.  **Certifique-se de que seu Servidor LLM está Ativo:**
-    Antes de iniciar a UI, o endpoint para extração de dados (conforme configurado em `ui5.py`, e.g., `http://localhost:8000/run`) deve estar acessível e funcional. A implementação em `agent.py` demonstra a utilização do Google ADK, mas a forma de expor este agente como um serviço HTTP deve ser feita separadamente.
+1.  **Ensure Your LLM Server is Active:**
+    Before starting the UI, the endpoint for data extraction (as configured in `ui5.py`, e.g., `http://localhost:8000/run`) must be accessible and functional. The implementation in `agent.py` demonstrates the use of Google ADK, but how to expose this agent as an HTTP service must be done separately.
 
-2.  **Execute a Interface do Streamlit:**
-    Navegue até a pasta `src` e inicie a aplicação:
+2.  **Start the LLM Agent Server (if using `adk api_server`):**
+    Open your terminal and navigate to the `src/Agents` directory:
+    ```bash
+    cd src/Agents
+    adk api_server
+    ```
+    Keep this terminal window open as it runs the server.
+
+3.  **Execute the Streamlit Interface:**
+    Open a **new terminal window** and navigate back to the `src` folder:
     ```bash
     cd src
-    cd Agents
-    adk api_server
-    novo terminal
-    ir para src outra vez
     streamlit run ui5.py
     ```
-    Isso abrirá a aplicação no seu navegador padrão (geralmente `http://localhost:8501`).
+    This will open the application in your default web browser (usually `http://localhost:8501`).
 
-## 📁 Estrutura do Projeto
-
-invoice-processor-project/
-├── .github/              # Configurações do GitHub (ex: workflows de CI/CD)
-├── src/                  # Código fonte principal da aplicação
-│   ├── agent.py          # Definição do Agente LLM para extração de faturas
-│   ├── invoice_validator.py # Lógica de validação de dados com Pydantic
-│   ├── styles.py         # Estilos CSS personalizados para a interface
-│   └── ui5.py            # A interface de usuário principal (Streamlit)
-├── docs/                 # Documentação adicional do projeto (opcional)
-├── samples/              # Exemplos de arquivos PDF de faturas
-│   ├── Fatura.pdf
-│   └── ... (outros exemplos)
-├── archive/              # Código e UIs de versões anteriores (não ativamente mantidas)
-│   ├── pydantic_val.py   # Versão anterior do validador de Pydantic
-│   └── ui/               # UIs de versões anteriores (ui, ui2, ui3, ui4)
-│       ├── ui (WORKING).py
-│       ├── ui2.py
-│       ├── ui3(Latest).py
-│       └── ui4.py
-├── .gitignore            # Arquivos e pastas a serem ignorados pelo Git
-├── requirements.txt      # Dependências do projeto Python
-└── README.md             # Este arquivo
-
-
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 
 * **Python 3.8+**
-* **Streamlit:** Para a criação da interface de usuário interativa.
-* **Pydantic:** Para a modelagem e validação de dados de forma declarativa.
-* **Requests:** Para comunicação HTTP com serviços externos (como o servidor LLM).
-* **Google ADK (Agent Development Kit):** Para a construção de agentes de IA para processamento de documentos.
+* **Streamlit:** For creating the interactive user interface.
+* **Pydantic:** For declarative data modeling and validation.
+* **Requests:** For HTTP communication with external services (like the LLM server).
+* **Google ADK (Agent Development Kit):** For building AI agents for document processing.
+
