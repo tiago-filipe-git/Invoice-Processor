@@ -1,0 +1,38 @@
+# Python
+__pycache__/       # Pastas de cache de bytecode do Python
+*.pyc              # Arquivos de bytecode compilado
+*.pyo              # Arquivos de bytecode otimizado
+*.pyd              # Módulos dinâmicos (Windows)
+.Python/           # Diretório de desenvolvimento do Python (geralmente para ambientes virtuais)
+env/               # Pasta comum para ambientes virtuais
+venv/              # Pasta comum para ambientes virtuais
+.venv/             # Outra pasta comum para ambientes virtuais
+pip-log.txt        # Logs do pip
+pip-delete-this-directory.txt
+
+# Logs
+*.log
+*.out
+
+# IDEs
+.idea/             # Pastas de configuração do PyCharm/IntelliJ
+.vscode/           # Pastas de configuração do VS Code (opcional, se você quiser ignorar)
+*.swp              # Arquivos temporários do Vim
+*.swo              # Arquivos de troca do Vim
+
+# Sistema Operacional
+.DS_Store          # Arquivos de metadados do macOS
+Thumbs.db          # Arquivos de cache de miniaturas do Windows
+
+# Specific to Streamlit
+.streamlit/local_storage.json # Streamlit's local storage for user settings/cache
+
+# Arquivos sensíveis ou grandes que não devem ser versionados
+*.env              # Arquivos de variáveis de ambiente
+.env.local         # Arquivos de variáveis de ambiente locais
+data/              # Se você tiver arquivos de dados muito grandes ou sensíveis aqui
+temp/              # Pasta para arquivos temporários
+
+# Se você gerar PDFs ou outros arquivos na pasta de saída
+# output/
+# generated_invoices/
